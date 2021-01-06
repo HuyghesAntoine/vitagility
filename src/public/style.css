@@ -1,0 +1,34 @@
+/* NAVBAR CSS */
+
+.navbar-header {
+    float: left;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    float:none;
+}
+
+#headTitle{
+    color: green;
+}
+
+
+
+#selectRadius{
+    width: 100%;
+}
+
+.advancedSearch{
+    margin-top: 5%;
+}
+
+.advancedTitle{
+    text-align: center;
+}
+
+#selectSports{
+   margin-right: 10px;
+}
