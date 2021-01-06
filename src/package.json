@@ -1,0 +1,27 @@
+{
+  "name": "vitagility",
+  "version": "1.0.0",
+  "description": "Mise en pratique de l'agilité dans le cadre d'un enseignement de 3 jours à l'université de Calais pour des étudiants en 3ème année de licence.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/huyghes-antoine/vitagility.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/huyghes-antoine/vitagility/issues"
+  },
+  "homepage": "https://gitlab.com/huyghes-antoine/vitagility#readme",
+  "dependencies": {
+    "cypress": "^6.2.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
