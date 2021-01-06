@@ -5,66 +5,80 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VitAgility</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css" type="text/css"/>
-
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
     </head>
 
     <body>
         <nav class="navbar sticky-top navbar-light bg-light" role="navigation">
             <div class="navbar-header">
-              <a class="navbar-brand" href="#"> <span id="headTitle">Vit</span>Agility </a>
+                <a class="navbar-brand" href="#"> <span id="headTitle">Vit</span>Agility </a>
             </div>
-          </nav>
+        </nav>
 
         <main class="container pt-5" role="main">
             <form>
-                <div class="row">
-                  <div class="input-group col">
+                <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Adresse">
-                    <select class="custom-select col" id="selectRadius" >
-                      <option selected>Rayon...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="form-select" id="radius">
+                        <option selected>Rayon...</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="100">100</option>
                     </select>
-                    <button type="submit" class="btn btn-success col">Search</button>
-                  </div>
+                    <button type="submit" class="btn btn-success">Rechercher</button>
                 </div>
-              </form>
+            </form>
 
-              <div class="card bg-light mb-3 advancedSearch">
-                <div class="card-header advancedTitle">Recherche avancée</div>
-                <div class="card-body">
-                    <form>
-                        <div class="row">
-                          <div class="input-group col">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="pleinAirCheck" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1"> Plein air</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="couvertCheck" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2"> Couvert </label>
-                              </div>
-                            <select class="custom-select col" id="selectSports" >
-                              <option selected>Sports...</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                            </select>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="ouvertCheck" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3"> Ouvert maintenant </label>
-                              </div>
-                          </div>
+            <div class="card bg-light mb-3 advancedSearch">
+            <div class="card-header advancedTitle">Recherche avancée</div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="input-group col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pleinAirCheck" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1"> Plein air</label>
                         </div>
-                      </form>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="couvertCheck" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2"> Couvert </label>
+                        </div>
+                        <select class="form-select col" id="selectSports" >
+                            <option selected>Sports...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="ouvertCheck" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3"> Ouvert maintenant </label>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="list-group col-8 text-center align-middle text-center" id="mainList">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-              </div>
+                <div class="col-4 mw-100 d-sm-block">
+                    <div class="h-50 bg-secondary" id="infoCard">
+                        Infocard
+                    </div>
+                    <div class="h-50 text-center bg-primary">
+                        map
+                    </div>
+                </div>
+            </div>
 
         </main>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
     </body>
     
 </html>
