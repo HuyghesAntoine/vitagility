@@ -24,17 +24,22 @@ exports.getPlaces = async function (
 
     result.data.features.forEach(async (element) => {
         let ad = element.properties.address_components;
-        places.push({
-            address: {
-                address: ad.address,
-                postal_code: ad.postal_code,
-                city: ad.city,
-                country: ad.country,
-            },
-            name: element.properties.name,
-            quality_indicator: element.properties.quality_indicator,
-            sport: element.properties.activities[0].sport_id,
-        });
+        if(element.properties.name != "Under review, proposed: -"){
+            places.push({
+                address: {
+                    address: ad.address,
+                    postal_code: ad.postal_code,
+                    city: ad.city,
+                    country: ad.country,
+                    coordinates: element.geometry.coordinates[0],
+                },
+                name: element.properties.name,
+                photo: element.properties.photo_reference,
+                uuid: element.properties.uuid,
+                quality_indicator: element.properties.quality_indicator,
+                sport: element.properties.activities[0].sport_id,
+            });
+        }
     });
     for (i = 0; i < places.length; i++) {
         if (typeof places[i].sport == 'number')

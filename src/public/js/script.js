@@ -1,5 +1,5 @@
 const listCode = (data) => `
-<a href="#" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
+<a href="#" id="${data.uuid}" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">${data.name}</h5>
       <small>${data.quality_indicator}</small>
@@ -11,7 +11,7 @@ const listCode = (data) => `
 
 const cardCode = (data) => `
 <div class="card">
-  <img src="..." class="card-img-top" alt="...">
+  <img src="#" class="card-img-top" alt="">
   <div class="card-body">
     <p class="card-text">${data}</p>
   </div>
@@ -31,12 +31,15 @@ async function loadActivities() {
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
-            infoCard.innerHTML = cardCode(el.getAttribute('data-uuid'));
-            res.data.features.forEach((sport) => {
-                if(sport.properties.uuid == el.getAttribute('data-uuid')){
-                    infoCard.innerHTML = cardCode(sport.properties.name);
-                    console.log(sport);
-                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.geometry.coordinates[1] + "," + sport.geometry.coordinates[0] + "&t=&z=8&ie=UTF8&iwloc=&output=embed";
+            console.log(el.id);
+            infoCard.innerHTML = cardCode(el.getAttribute('data.name'));
+            res.forEach((sport) => {
+                console.log(sport.sport);
+                if(sport.uuid == el.id){
+                    infoCard.innerHTML = cardCode("<u>nom :</u> " + sport.name + "<br>" +
+                        "<u>sports :</u> " + sport.sport.name
+                    );
+                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.address.coordinates[1] + "," + sport.address.coordinates[0] + "&t=&z=8&ie=UTF8&iwloc=&output=embed";
                 }
             });
         });
@@ -60,7 +63,6 @@ if ('geolocation' in navigator) {
         var crd = pos.coords;
         def.lat = crd.latitude;
         def.long = crd.longitude;
-        console.log(def.lat+ " " +def.long);
         loadActivities();
     }
 
