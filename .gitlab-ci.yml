@@ -18,20 +18,20 @@ staging:
   type: deploy
   image : ruby:2.2
   script:
-  - apt-get update -qy
-  - apt-get install -yqq ruby ruby-dev nodejs --silent
-  - gem install dpl
-  - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_STAGING_API_KEY
+    - apt-get update -qy
+    - apt-get install -yqq ruby ruby-dev nodejs --silent
+    - gem install dpl
+    - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_STAGING_API_KEY
   only:
-  - develop
+    - develop
 
 production:
   type: deploy
   image : ruby:2.2
   script:
-  - apt-get update -qy
-  - apt-get install -yqq ruby ruby-dev nodejs --silent
-  - gem install dpl
-  - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_PRODUCTION_API_KEY
+    - apt-get update -qy
+    - apt-get install -yqq ruby ruby-dev nodejs --silent
+    - gem install dpl
+    - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_PRODUCTION_API_KEY
   only:
-  - master
+    - master
