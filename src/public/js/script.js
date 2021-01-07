@@ -1,45 +1,61 @@
 const listCode = (data) => `
-<a href="#" id="${data.uuid}" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
+<a id="${
+    data.uuid
+}" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">${data.name}</h5>
-      <small>${data.quality_indicator}</small>
+      <small>${data.sport.name}</small>
     </div>
-    <p class="mb-1">${data.address.address || 'Inconnu'}</p>
-    <small>${data.sport.name}</small>
+    <p class="mb-1">${
+        data.address.address != 'Inconnu' ? data.address.address : ''
+    }</p>
 </a>
 `;
 
 const cardCode = (data) => `
 <div class="card">
-  <img src="#" class="card-img-top" alt="">
+  <img src="${data.photo}" class="card-img-top" alt="">
   <div class="card-body">
-    <p class="card-text">${data}</p>
+    <p class="card-text">
+    <u>nom :</u> ${data.name}<br>
+    <u>sports :</u> ${data.sport.name}<br>
+    <u>adresse :</u> ${data.address.address}<br>
+    ${data.sport.tags
+        .map(function (key, index) {
+            if (index < 5)
+                return `<span class="text-capitalize badge rounded-pill bg-secondary bg-${key.replace(
+                    '-',
+                    ''
+                )}">${key.replace('_', ' ')}</span>`;
+        })
+        .filter(Boolean)}
+    </p>
   </div>
 </div>`;
 
 const link = (def) => `/api/places/${def.long}&${def.lat}&${def.radius}`;
+let res = [];
 
 async function loadActivities() {
-    let res = await fetch(link(def));
+    res = await fetch(link(def));
     res = await res.json();
     console.log(res);
     mainList.innerHTML = '';
     res.forEach((sport) => {
-        console.log(sport);
         mainList.innerHTML += listCode(sport);
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
-            console.log(el.id);
-            infoCard.innerHTML = cardCode(el.getAttribute('data.name'));
             res.forEach((sport) => {
-                console.log(sport.sport);
-                if(sport.uuid == el.id){
-                    infoCard.innerHTML = cardCode("<u>nom :</u> " + sport.name + "<br>" +
-                        "<u>sports :</u> " + sport.sport.name + "<br>" + 
-                        "<u>adresse :</u> " + sport.address.address
-                    );
-                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.address.coordinates[1] + "," + sport.address.coordinates[0] + "&t=&z=11&ie=UTF8&iwloc=&output=embed";
+                if (sport.uuid == el.id) {
+                    console.log(sport);
+                    infoCard.innerHTML = cardCode(sport);
+                    document.getElementById('gmap_canvas').src =
+                        'https://maps.google.com/maps?q=' +
+                        sport.address.coordinates[1] +
+                        ',' +
+                        sport.address.coordinates[0] +
+                        '&t=&z=11&ie=UTF8&iwloc=&output=embed';
                 }
             });
         });
