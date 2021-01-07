@@ -21,6 +21,19 @@ exports.findPlace = async function (input) {
     return res.data.candidates[0];
 };
 
+exports.findDetailedPlace = async function (id) {
+    const res = await client.placeDetails({
+        params:{
+            key: process.env.GOOGLE_MAPS_API_KEY,
+            place_id: id,
+            inputtype: 'textquery',
+            fields: 'photos,rating',
+        },
+        timeout:1000,
+    });
+    return res.data;
+}
+
 exports.findCityStade = function () {
     client
         .textSearch({

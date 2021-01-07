@@ -46,8 +46,14 @@ async function loadActivities() {
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
-            res.forEach((sport) => {
+            res.forEach(async (sport) => {
                 if (sport.uuid == el.id) {
+                    if (sport.google_place_id != null){
+                        let detailedLink = '/api/places/details/'+sport.google_place_id;
+                        let resultat = await fetch(detailedLink);
+                        resultat = await resultat.json();
+                        console.log(resultat);
+                    }
                     console.log(sport);
                     infoCard.innerHTML = cardCode(sport);
                     document.getElementById('gmap_canvas').src =
