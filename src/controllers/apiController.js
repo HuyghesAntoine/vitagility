@@ -5,7 +5,10 @@ exports.apiPlaces = async function (req, res) {
     let result = await apiModel.getPlaces(
         req.params.long,
         req.params.lat,
-        req.params.radius
+        req.params.radius,
+        req.params.sport,
+        req.params.outdoor,
+        req.params.indoor
     );
     console.log(req.params.long, req.params.lat, req.params.radius);
     res.send(result);
