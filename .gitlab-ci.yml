@@ -8,4 +8,4 @@ test:
   script: 
     - cd src
     - npm install 
-    - cypress run
+    - npm run cypress:run
