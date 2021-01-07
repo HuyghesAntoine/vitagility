@@ -2,8 +2,6 @@ image: cypress/base:12
 
 stages:
   - build
-  - staging
-  - production
 
 build:
   stage: build
@@ -13,25 +11,3 @@ build:
     - npm install
     - npm run dev &
     - npm run cypress:run
-
-staging:
-  type: deploy
-  image: ruby:2.2
-  script:
-    - apt-get update -qy
-    - apt-get install -yqq ruby ruby-dev nodejs --silent
-    - gem install dpl
-    - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_STAGING_API_KEY
-  only:
-    - develop
-
-production:
-  type: deploy
-  image: ruby:2.2
-  script:
-    - apt-get update -qy
-    - apt-get install -yqq ruby ruby-dev nodejs --silent
-    - gem install dpl
-    - dpl --provider=heroku --app=vitagility --api-  key=$HEROKU_PRODUCTION_API_KEY
-  only:
-    - master
