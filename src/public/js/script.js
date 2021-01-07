@@ -35,6 +35,13 @@ async function loadActivities() {
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
             infoCard.innerHTML = cardCode(el.getAttribute('data-uuid'));
+            res.data.features.forEach((sport) => {
+                if(sport.properties.uuid == el.getAttribute('data-uuid')){
+                    infoCard.innerHTML = cardCode(sport.properties.name);
+                    console.log(sport);
+                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.geometry.coordinates[1] + "," + sport.geometry.coordinates[0] + "&t=&z=8&ie=UTF8&iwloc=&output=embed";
+                }
+            });
         });
     });
 }
@@ -42,7 +49,7 @@ async function loadActivities() {
 // Global
 let def = {
     lat: '3.057256',
-    long: '50.629250',
+    long: '55.629250',
     radius: '100',
 };
 
@@ -56,6 +63,7 @@ if ('geolocation' in navigator) {
         var crd = pos.coords;
         def.lat = crd.latitude;
         def.long = crd.longitude;
+        console.log(def.lat+ " " +def.long);
         loadActivities();
     }
 
