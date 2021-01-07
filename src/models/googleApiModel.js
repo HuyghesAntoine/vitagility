@@ -10,29 +10,24 @@ exports.findPlace = async function (input) {
         },
         timeout: 1000, // milliseconds
     });
-    /*.then((r) => {
-            console.log(r.data.candidates);
-            return r.data.candidates;
-        })
-        .catch((e) => {
-            console.log(e.response.data.error_message);
-            return null;
-        });*/
     return res.data.candidates[0];
 };
 
 exports.findDetailedPlace = async function (id) {
     const res = await client.placeDetails({
-        params:{
+        params: {
             key: process.env.GOOGLE_MAPS_API_KEY,
             place_id: id,
             inputtype: 'textquery',
             fields: 'photos,rating',
         },
-        timeout:1000,
+        timeout: 1000,
     });
+    res.data.result.photos = await getPhoto(
+        res.data.result.photos[0].photo_reference
+    );
     return res.data;
-}
+};
 
 exports.findCityStade = function () {
     client
@@ -52,4 +47,16 @@ exports.findCityStade = function () {
         .catch((e) => {
             console.log(e.response.data.error_message);
         });
+};
+
+getPhoto = async function (ref) {
+    const res = await client.placePhoto({
+        params: {
+            key: process.env.GOOGLE_MAPS_API_KEY,
+            photoreference: ref,
+            maxwidth: 300,
+        },
+        timeout: 1000,
+    });
+    return res.data;
 };
