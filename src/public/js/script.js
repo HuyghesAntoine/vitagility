@@ -36,9 +36,10 @@ async function loadActivities() {
                 console.log(sport.sport);
                 if(sport.uuid == el.id){
                     infoCard.innerHTML = cardCode("<u>nom :</u> " + sport.name + "<br>" +
-                        "<u>sports :</u> " + sport.sport.name
+                        "<u>sports :</u> " + sport.sport.name + "<br>" + 
+                        "<u>adresse :</u> " + sport.address.address
                     );
-                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.address.coordinates[1] + "," + sport.address.coordinates[0] + "&t=&z=8&ie=UTF8&iwloc=&output=embed";
+                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.address.coordinates[1] + "," + sport.address.coordinates[0] + "&t=&z=11&ie=UTF8&iwloc=&output=embed";
                 }
             });
         });
