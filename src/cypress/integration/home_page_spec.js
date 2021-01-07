@@ -18,8 +18,8 @@ describe('US -> test api CANADA coordinates', () => {
 describe('US -> test gmap autocomplete', () => {
     it('Get full adress with 0 details', () => {
         cy.visit('/');
-        cy.get('#address').clear().type('marie calais')
-        cy.get('#search').click()
-        cy.get('#address').should('have.value',  'Place du Soldat Inconnu, 62100 Calais, France')
+        cy.get('#address').clear().type('calais')
+        cy.get('#search', {timeout:2000}).click()
+        cy.get('#address').should('have.value',  'Calais, France')
     })
 })
