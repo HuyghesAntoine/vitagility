@@ -26,7 +26,7 @@ exports.getPlaces = async function (
     let nb_result = 0;
     result.data.features.forEach(async (element) => {
         let ad = element.properties.address_components;
-        if(element.properties.name != "Under review, proposed: -" && element.properties.quality_indicator > 0 && nb_result <=10){
+        if(element.properties.name != "Under review, proposed: -" && element.properties.quality_indicator > 0 && nb_result < 10){
             if(ad.address == null) ad.address = "Inconnu";
             places.push({
                 address: {
