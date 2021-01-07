@@ -8,27 +8,21 @@
 }
 
 .navbar-brand {
-    float:none;
+    float: none;
 }
 
-#headTitle{
+#headTitle {
     color: green;
 }
 
-
-
-#selectRadius{
-    width: 100%;
-}
-
-.advancedSearch{
+.advancedSearch {
     margin-top: 5%;
 }
 
-.advancedTitle{
+.advancedTitle {
     text-align: center;
 }
 
-#selectSports{
-   margin-right: 10px;
+#selectSports {
+    margin-right: 10px;
 }
