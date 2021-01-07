@@ -28,6 +28,7 @@ exports.getPlaces = async function (
         let ad = element.properties.address_components;
         if(element.properties.name != "Under review, proposed: -" && element.properties.quality_indicator > 0 && nb_result <=10){
             if(ad.address == null) ad.address = "Inconnu";
+            
             places.push({
                 address: {
                     address: ad.address,
@@ -36,6 +37,7 @@ exports.getPlaces = async function (
                     country: ad.country,
                     coordinates: element.geometry.coordinates[0],
                 },
+                google_place_id: element.properties.google_place_id,
                 name: element.properties.name,
                 photo: element.properties.photo_reference,
                 uuid: element.properties.uuid,
