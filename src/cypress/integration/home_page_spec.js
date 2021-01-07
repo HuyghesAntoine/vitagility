@@ -6,7 +6,7 @@ describe('The Home Page', () => {
 });
 
 /* Tests on our own API */
-describe('US -> test api CANADA coordinates', () => {
+/*describe('US -> test api CANADA coordinates', () => {
     it('Get api results with canada coordinates', () => {
         cy.visit('/');
         cy.request('GET', 'http://localhost:3000/api/places/-73.582&45.511&100').as('elements')
@@ -24,7 +24,7 @@ describe('US -> test api sport id to name', () => {
             expect(response.body['0']['sport']).to.have.property('name', 'Soccer')
         })
     })
-})
+})*/
 
 /* Tests on the home page */
 describe('US -> test gmap autocomplete', () => {

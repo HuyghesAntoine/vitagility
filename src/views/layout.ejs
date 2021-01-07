@@ -21,6 +21,7 @@
                     <input id="address" type="text" class="form-control" placeholder="Adresse">
                     <select class="form-select" id="radius">
                         <option selected>Rayon...</option>
+                        <option value="1">1</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="25">25</option>
@@ -37,18 +38,14 @@
                     <div class="row">
                         <div class="input-group col">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="pleinAirCheck" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1"> Plein air</label>
+                            <label class="form-check-label" for="inlineCheckbox1"> <input class="form-check-input" type="checkbox" id="pleinAirCheck" value="option1" checked> Plein air</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="couvertCheck" value="option2">
+                            <input class="form-check-input" type="checkbox" id="couvertCheck" value="option2" checked>
                             <label class="form-check-label" for="inlineCheckbox2"> Couvert </label>
                         </div>
                         <select class="form-select col" id="selectSports" >
                             <option selected>Sports...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="ouvertCheck" value="option3">
