@@ -1,4 +1,4 @@
-image: cyoress/base:12
+image: cypress/base:12
 
 stages:
   - test
