@@ -7,16 +7,16 @@ stages:
 
 build:
   stage: build
-  script: 
+  script:
     - cd src
     - export GOOGLE_MAPS_API_KEY="AIzaSyAfuHdVrkii8U4UY7Y6tYtDIg-l1jAiIkY"
-    - npm install 
+    - npm install
     - npm run dev &
     - npm run cypress:run
 
 staging:
   type: deploy
-  image : ruby:2.2
+  image: ruby:2.2
   script:
     - apt-get update -qy
     - apt-get install -yqq ruby ruby-dev nodejs --silent
@@ -27,7 +27,7 @@ staging:
 
 production:
   type: deploy
-  image : ruby:2.2
+  image: ruby:2.2
   script:
     - apt-get update -qy
     - apt-get install -yqq ruby ruby-dev nodejs --silent
