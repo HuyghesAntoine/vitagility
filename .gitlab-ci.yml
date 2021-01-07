@@ -9,7 +9,7 @@ build:
   script: 
     - cd src
     - npm install 
-    - npm run dev
+    - npm run dev && npm run cypress:run
 
 test:
   stage: test
