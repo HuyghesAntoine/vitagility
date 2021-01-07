@@ -1,4 +1,4 @@
-image: cyoress/base:10
+image: alpine
 
 stages:
   - test
