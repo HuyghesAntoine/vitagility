@@ -12,7 +12,8 @@ exports.getPlaces = async function (
         ',' +
         latitude +
         '&radius=' +
-        radius;
+        radius + 
+        '&limit=' + 100;
     if (sport != '') {
         url += '&sports=' + sport;
     }
@@ -22,9 +23,11 @@ exports.getPlaces = async function (
     let result = await fetch(url);
     result = await result.json();
 
+    let nb_result = 0;
     result.data.features.forEach(async (element) => {
         let ad = element.properties.address_components;
-        if(element.properties.name != "Under review, proposed: -"){
+        if(element.properties.name != "Under review, proposed: -" && element.properties.quality_indicator > 0 && nb_result <=10){
+            if(ad.address == null) ad.address = "Inconnu";
             places.push({
                 address: {
                     address: ad.address,
@@ -39,6 +42,7 @@ exports.getPlaces = async function (
                 quality_indicator: element.properties.quality_indicator,
                 sport: element.properties.activities[0].sport_id,
             });
+            nb_result += 1;
         }
     });
     for (i = 0; i < places.length; i++) {
