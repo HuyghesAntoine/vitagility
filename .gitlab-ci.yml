@@ -9,5 +9,4 @@ build:
     - cd src
     - npm install 
     - npm run dev &
-    - while ! nc -z localhost:3000; do sleep 1; done
     - npm run cypress:run
