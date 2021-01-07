@@ -15,8 +15,32 @@ Toutes les informations nécessaires sont décrites dans les documents suivant:
 
 
 * **06/01 :** 
-    * Choix du sujet : **1** 
-    * Maquette du site 
-    ![](img/maquette.png)
-    * Nous allons utiliser l'API de **Décathlon** SportsPlaces pour récupèrer les lieux sportifs. 
-    * Nous voulions utiliser l'API **Google Map** pour avoir la latitude et longitude d'une adresse voulue, mais elle n'est pas publique. Donc nous nous réorientons vers l'API de **PoisitionStack**
+    * **SPRINT 1**
+        * Choix du sujet : **1** 
+        * Maquette du site 
+
+        <img src="img/maquette.png" style="width: 250px;"/>
+
+        * Activer la géolocalisation
+
+    * **SPRINT 2**
+        
+        * Nous allons utiliser l'API de **Décathlon** SportsPlaces pour récupèrer les lieux sportifs. 
+        * Nous voulions utiliser l'API **Google Map** pour avoir la latitude et longitude d'une adresse voulue, mais elle n'est pas publique. Donc nous nous réorientons vers l'API de **PoisitionStack**
+        * Nous avons réussis à récupérer les lieux présents dans l'API décathlon et les reformer dans notre propre API à l'adresse http://localhost:3000/api/places/latitude&longitude&radius" 
+            * Latitude : latitude du lieu souhaité 
+            * Longitute : longitutde du lieu souhaité
+            * Radius : rayon de la zone de recherche
+
+* **07/01 :** 
+
+    * **SPRINT 3**
+        * Au final nous avons trouvé un moyen d'utiliser l'API de google maps, il fallait ajouter un moyen de paiement pour pouvoir en profiter. 
+        * Nous avons afficher les résultats des recherches sous forme d'élement sur la page web. Avec une limite de 10 lieux par recherche. 
+        * Ajout de l'API google map pour avoir une prévisualisation de la carte du lieu de la géolocalisation, et des lieux sélectionnés. 
+        * Mise en place de l'intégration continue par le biais du fichier .yml
+
+    * **SPRINT 4**
+        * Mise en place des tests avec l'outil Cypress. 
+        * Refonte du design pour coller au design de décathlon 
+        * Mise en place de l'ajout d'adresse complète lors des recherches de lieux. Ex: recherche "calais"  ->  "Calais, France" grâce à l'API de google maps. 

@@ -10,5 +10,6 @@ router.get('/', indexController.index);
 router.get('/api/places/:long&:lat&:radius&:outdoor&:indoor', apiController.apiPlaces);
 router.get('/api/sports', apiController.apiSports);
 router.get('/api/find/:input', apiController.apiPlacesfromInput);
+router.get('/api/places/details/:id', apiController.apiDetailedPlaces);
 
 module.exports = router;

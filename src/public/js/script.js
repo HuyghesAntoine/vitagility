@@ -14,12 +14,17 @@ const listCode = (data) => `
 
 const cardCode = (data) => `
 <div class="card">
-  <img src="${data.photo}" class="card-img-top" alt="">
+  <img src="${data.photos}" class="card-img-top mh-3" alt="">
   <div class="card-body">
     <p class="card-text">
     <u>nom :</u> ${data.name}<br>
     <u>sports :</u> ${data.sport.name}<br>
     <u>adresse :</u> ${data.address.address}<br>
+    ${
+        typeof data.rating !== 'undefined'
+            ? 'Note utilisateur :' + data.rating + ' / 5'
+            : ''
+    }<br>
     ${data.sport.tags
         .map(function (key, index) {
             if (index < 5)
@@ -83,9 +88,30 @@ async function loadActivities() {
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
-            res.forEach((sport) => {
+            res.forEach(async (sport) => {
                 if (sport.uuid == el.id) {
+                    detail = {};
+                    if (sport.google_place_id != null) {
+                        let detailedLink =
+                            '/api/places/details/' + sport.google_place_id;
+                        detail = await fetch(detailedLink);
+                        detail = await detail.json();
+                        detail = detail.result;
+
+                        var arrayBufferView = new Uint8Array(
+                            detail.photos.data
+                        );
+                        var blob = new Blob([arrayBufferView], {
+                            type: 'image/jpeg',
+                        });
+                        var urlCreator = window.URL || window.webkitURL;
+                        var imageUrl = urlCreator.createObjectURL(blob);
+                        var img = document.querySelector('img');
+                        detail.photos = imageUrl;
+                    }
+                    sport = Object.assign(sport, detail);
                     console.log(sport);
+
                     infoCard.innerHTML = cardCode(sport);
                     document.getElementById('gmap_canvas').src =
                         'https://maps.google.com/maps?q=' +

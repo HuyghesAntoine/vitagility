@@ -22,3 +22,9 @@ exports.apiPlacesfromInput = async function (req, res) {
     console.log(result);
     res.send(result);
 };
+
+exports.apiDetailedPlaces = async function (req, res) {
+    let result = await googleModel.findDetailedPlace(req.params.id);
+    console.log(req.params.id);
+    res.send(result);
+};
