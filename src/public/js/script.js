@@ -17,8 +17,7 @@ const cardCode = (data) => `
   </div>
 </div>`;
 
-const link = (def) =>
-    `/api/places/${def.long}&${def.lat}&${def.radius}&limit=10`;
+const link = (def) => `/api/places/${def.long}&${def.lat}&${def.radius}`;
 
 async function loadActivities() {
     let res = await fetch(link(def));
@@ -69,5 +68,22 @@ if ('geolocation' in navigator) {
 /* Form Listener */
 radius.addEventListener('change', (event) => {
     def.radius = radius.value;
+    loadActivities();
+});
+
+loadingCode = `<div class="spinner-border" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>`;
+
+searchForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    mainList.innerHTML = loadingCode;
+    let res = await fetch('api/find/' + address.value);
+
+    res = await res.json();
+    console.log(res);
+    def.lat = res.geometry.location.lat;
+    def.long = res.geometry.location.lng;
+    address.value = res.formatted_address;
     loadActivities();
 });

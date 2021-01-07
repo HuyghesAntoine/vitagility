@@ -16,9 +16,9 @@
         </nav>
 
         <main class="container pt-5" role="main">
-            <form>
+            <form id="searchForm">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Adresse">
+                    <input id="address" type="text" class="form-control" placeholder="Adresse">
                     <select class="form-select" id="radius">
                         <option selected>Rayon...</option>
                         <option value="5">5</option>
@@ -26,7 +26,7 @@
                         <option value="25">25</option>
                         <option value="100">100</option>
                     </select>
-                    <button type="submit" class="btn btn-success">Rechercher</button>
+                    <button type="submit" class="btn btn-success" id="search">Rechercher</button>
                 </div>
             </form>
 
