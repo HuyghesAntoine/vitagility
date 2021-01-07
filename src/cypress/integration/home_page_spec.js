@@ -23,3 +23,14 @@ describe('US -> test gmap autocomplete', () => {
         cy.get('#address').should('have.value',  'Calais, France')
     })
 })
+
+describe('US -> test api sport id to name', () => {
+    it('Get api results for sports id', () => {
+        cy.visit('/');
+        cy.request('GET', 'http://localhost:3000/api/places/51.033&26.358&100').as('elements')
+        cy.get('@elements').should((response)=>{
+            expect(response.body['0']['sport']).to.have.property('id', 81)
+            expect(response.body['0']['sport']).to.have.property('name', 'Soccer')
+        })
+    })
+})
