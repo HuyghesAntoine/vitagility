@@ -38,7 +38,6 @@ const cardCode = (data) => `
   </div>
 </div>`;
 
-
 document.getElementById('pleinAirCheck').addEventListener('change', (event) => {
     def.outdoor = document.getElementById('pleinAirCheck').checked;
     loadActivities();
@@ -53,14 +52,15 @@ document.getElementById('selectSports').addEventListener('change', (event) => {
     loadActivities();
 });
 
-const link = (def) => `/api/places/${def.long}&${def.lat}&${def.radius}&${def.selected_sport}&${def.outdoor}&${def.indoor}`;
+const link = (def) =>
+    `/api/places/${def.long}&${def.lat}&${def.radius}&${def.selected_sport}&${def.outdoor}&${def.indoor}`;
 let res = [];
 document.getElementById('pleinAirCheck').checked = true;
 document.getElementById('couvertCheck').checked = true;
 
 loadSports();
-async function loadSports(){
-    let sports = await fetch("/api/sports");
+async function loadSports() {
+    let sports = await fetch('/api/sports');
     sports = await sports.json();
     let name_sports = [];
     sports.forEach((sport) => {
@@ -68,7 +68,7 @@ async function loadSports(){
     });
     name_sports.sort();
     name_sports.forEach((sport) => {
-        var node = document.createElement("option");
+        var node = document.createElement('option');
         var textnode = document.createTextNode(sport[0]);
         node.appendChild(textnode);
         node.value = sport[0];
@@ -106,9 +106,9 @@ async function loadActivities() {
                         });
                         var urlCreator = window.URL || window.webkitURL;
                         var imageUrl = urlCreator.createObjectURL(blob);
-                        var img = document.querySelector('img');
                         detail.photos = imageUrl;
                     }
+                    console.log(detail);
                     sport = Object.assign(sport, detail);
                     console.log(sport);
 
