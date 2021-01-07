@@ -1,0 +1,12 @@
+image: cypress/base:12
+
+stages:
+  - build
+
+build:
+  stage: build
+  script: 
+    - cd src
+    - npm install 
+    - npm run dev &
+    - npm run cypress:run
