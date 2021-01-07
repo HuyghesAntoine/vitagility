@@ -7,7 +7,8 @@ const apiController = require('../controllers/apiController');
 router.get('/', indexController.index);
 
 /* API */
-router.get('/api/places/:long&:lat&:radius', apiController.apiPlaces);
+router.get('/api/places/:long&:lat&:radius&:outdoor&:indoor', apiController.apiPlaces);
+router.get('/api/sports', apiController.apiSports);
 router.get('/api/find/:input', apiController.apiPlacesfromInput);
 
 module.exports = router;
