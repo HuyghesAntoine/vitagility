@@ -1,5 +1,5 @@
 const listCode = (data) => `
-<a href="#" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
+<a href="#" id="${data.uuid}" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">${data.name}</h5>
       <small>${data.quality_indicator}</small>
@@ -11,7 +11,7 @@ const listCode = (data) => `
 
 const cardCode = (data) => `
 <div class="card">
-  <img src="..." class="card-img-top" alt="...">
+  <img src="#" class="card-img-top" alt="">
   <div class="card-body">
     <p class="card-text">${data}</p>
   </div>
@@ -30,7 +30,17 @@ async function loadActivities() {
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
-            infoCard.innerHTML = cardCode(el.getAttribute('data-uuid'));
+            console.log(el.id);
+            infoCard.innerHTML = cardCode(el.getAttribute('data.name'));
+            res.forEach((sport) => {
+                console.log(sport.sport);
+                if(sport.uuid == el.id){
+                    infoCard.innerHTML = cardCode("<u>nom :</u> " + sport.name + "<br>" +
+                        "<u>sports :</u> " + sport.sport.name
+                    );
+                    document.getElementById('gmap_canvas').src = "https://maps.google.com/maps?q=" + sport.address.coordinates[1] + "," + sport.address.coordinates[0] + "&t=&z=8&ie=UTF8&iwloc=&output=embed";
+                }
+            });
         });
     });
 }
@@ -38,7 +48,7 @@ async function loadActivities() {
 // Global
 let def = {
     lat: '3.057256',
-    long: '50.629250',
+    long: '55.629250',
     radius: '100',
 };
 
