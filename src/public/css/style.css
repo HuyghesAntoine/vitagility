@@ -15,14 +15,15 @@
     color: green;
 }
 
-.advancedSearch {
-    margin-top: 5%;
-}
-
 .advancedTitle {
     text-align: center;
 }
 
 #selectSports {
     margin-right: 10px;
+}
+
+.bg-free {
+    background-color: #e2eea0 !important;
+    color: black;
 }
