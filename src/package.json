@@ -19,9 +19,11 @@
   },
   "homepage": "https://gitlab.com/huyghes-antoine/vitagility#readme",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.14",
     "cypress": "^6.2.1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.6"
   }
 }

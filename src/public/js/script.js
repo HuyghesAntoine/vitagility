@@ -1,14 +1,11 @@
 const listCode = (data) => `
-    
-<a href="#" class="list-group-item list-group-item-action" aria-current="true" data-uuid=${
-    data.properties.uuid
-}>
+<a href="#" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">${data.properties.name}</h5>
-      <small>${data.properties.quality_indicator}</small>
+      <h5 class="mb-1">${data.name}</h5>
+      <small>${data.quality_indicator}</small>
     </div>
-    <p class="mb-1">${data.properties.address_components.city || 'Inconnu'}</p>
-    <small>${data.properties.activities[0].sport_id}</small>
+    <p class="mb-1">${data.address.address || 'Inconnu'}</p>
+    <small>${data.sport.name}</small>
 </a>
 `;
 
@@ -21,14 +18,14 @@ const cardCode = (data) => `
 </div>`;
 
 const link = (def) =>
-    `https://sportplaces.api.decathlon.com/api/v1/places?origin=${def.long},${def.lat}&radius=${def.radius}&sports=127&limit=5`;
+    `/api/places/${def.long}&${def.lat}&${def.radius}&limit=10`;
 
 async function loadActivities() {
     let res = await fetch(link(def));
     res = await res.json();
     console.log(res);
     mainList.innerHTML = '';
-    res.data.features.forEach((sport) => {
+    res.forEach((sport) => {
         console.log(sport);
         mainList.innerHTML += listCode(sport);
     });
