@@ -1,4 +1,4 @@
-image: node:10
+image: cyoress/base:12
 
 stages:
   - test
