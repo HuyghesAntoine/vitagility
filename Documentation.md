@@ -26,25 +26,31 @@
 
 ## Lien de l'API
 * `/api/sports`:
+    
     retourne la listes des sports disponibles trié par ordre alphabétique
 * `/api/sport/$id`:
     * *id*: id d'un sport obtenable depuit `/api/sports`
+
     retourne le sport de l'*id* correspondant
 * `/api/places/$long&$lat&$radius`:
     * *long*: longitude entre -180 et 180, coordonnée d'ouest en est
     * *lat*: latitude entre -90 et 90, coordonnée du nord au sud
-    * *radius*: rayon de recherche entre 1 et 100
+    * *radius*: rayon de recherche entre 1 et 100 km
+    
     retourne tous les lieux de sport autour de la *longitude*, *latitude* correspondante avec une limite de rayon de recherche
 * `/api/places/$long&$lat&$limit&$sport&$outdoor&$indoor`:
-    * *sport*: id d'une sport
+    * *sport*: id d'un sport
     * *outdoor*: [true, false] sport d'exterieur
     * *indoor*: [true, false] sport d'intérieur
+    
     retourne les salles pratiquant le *sport* souhaité autour de la *longitude*, *latitude*
 * `/api/find/$input`
     * *input*: ville ou lieux qui seras convertie en coordonnées
+    
     retourne la latitude et longitude d'un lieu
 * `/api/places/details/$id`:
     * *id*: google\_place\_id
+    
     retourne (buffer d'image max3), rating
 
 
