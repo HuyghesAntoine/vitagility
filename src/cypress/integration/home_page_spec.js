@@ -6,6 +6,7 @@ describe('The Home Page', () => {
 });
 
 /* Tests on our own API */
+/*
 describe('US -> test api CANADA coordinates', () => {
     it('Get api results with canada coordinates', () => {
         cy.visit('/');
@@ -25,7 +26,7 @@ describe('US -> test api sport id to name', () => {
         })
     })
 })
-
+*/
 /* Tests on the home page */
 
 /*
