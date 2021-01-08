@@ -13,7 +13,7 @@ build:
     - npm run dev &
     - npm run cypress:run
 
-heroku_deploy:
+deploy:
     stage: deploy
     image: bitnami/minideb
     before_script:
