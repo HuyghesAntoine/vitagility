@@ -3,6 +3,7 @@ image: cypress/base:12
 stages:
   - build
   - deploy
+  - eslint
 
 build:
   stage: build
@@ -12,6 +13,16 @@ build:
     - npm install 
     - npm run dev &
     - npm run cypress:run
+
+eslint:
+  stage: eslint
+  image: node:14-alpine
+  script:
+    - npm ci
+    - npm x eslint --format gitlab .
+  artifacts:
+    reports:
+      codequality: gl-codequality.json
 
 deploy:
     stage: deploy
