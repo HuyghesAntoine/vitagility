@@ -18,14 +18,21 @@ exports.findDetailedPlace = async function (id) {
         params: {
             key: process.env.GOOGLE_MAPS_API_KEY,
             place_id: id,
-            inputtype: 'textquery',
             fields: 'photos,rating',
         },
         timeout: 1000,
     });
-    res.data.result.photos = await getPhoto(
-        res.data.result.photos[0].photo_reference
-    );
+    try {
+        for (i = 0; i < Math.max(res.data.result.photos.length, 3); i++) {
+            res.data.result.photos[i] = await getPhoto(
+                res.data.result.photos[i].photo_reference
+            );
+            console.log;
+            //console.log(res.data.result.photos[i]);
+        }
+    } catch (e) {
+        //console.log(e);
+    }
     return res.data;
 };
 
@@ -54,7 +61,7 @@ getPhoto = async function (ref) {
         params: {
             key: process.env.GOOGLE_MAPS_API_KEY,
             photoreference: ref,
-            maxwidth: 300,
+            maxheight: 300,
         },
         timeout: 1000,
     });

@@ -5,19 +5,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VitAgility</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css" type="text/css"/>
+        
+        <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+        rel="stylesheet"
+        />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap"
+        rel="stylesheet"
+        />
+        
+        <link rel="stylesheet" href="css/index.css" type="text/css"/>
+        <link rel="stylesheet" href="css/css.css" type="text/css"/>
     </head>
 
     <body>
-        <nav class="navbar sticky-top navbar-light border-bottom border-primary bg-light" role="navigation">
-            <div class="navbar-header">
-                <h1 class="display-2">VitAgility</h1>
+        <nav class="navbar sticky-top navbar-light vtmn-border-nav bg-light" role="navigation">
+            <div class="navbar-header container">
+                <h1 class="vtmn-typo_display-1">VitAgility</h1>
             </div>
         </nav>
 
         <main class="container pt-5" role="main">
+
+            <p class="p-4 text-center vtmn-typo_title-5"><img class="d-inline" src="assets/icons/standard/notif_information.svg">Texte de présentation de l'outils <span class="vtmn-typo_display-2">VitAgility</span> et de ces <span class="vtmn-bg-brand-digital vtmn-text-white vtmn-font-bold vtmn-text-2xl vtmn-uppercase">features</span>.</p>
             <form id="searchForm">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="activeGeo"><img src="assets/icons/standard/geolocalization.svg"></span>
                     <input id="address" type="text" class="form-control" placeholder="Adresse">
                     <select class="form-select" id="radius">
                         <option selected>Rayon...</option>
@@ -27,7 +41,7 @@
                         <option value="25">25</option>
                         <option value="100">100</option>
                     </select>
-                    <button type="submit" class="btn btn-primary btn-brand" id="search">Rechercher</button>
+                    <button type="submit" id="search" class="vtmn-btn vtmn-btn_variant--primary vtmn-btn_size--medium">Rechercher</button>    
                 </div>
             </form>
 
@@ -45,7 +59,7 @@
                             <label class="form-check-label" for="inlineCheckbox2"> Couvert </label>
                         </div>
                         <select class="form-select col" id="selectSports" >
-                            <option selected>Sports...</option>
+                            <option value="-1" selected>Sports...</option>
                         </select>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="ouvertCheck" value="option3">
@@ -58,12 +72,7 @@
             </div>
 
             <div class="row g-0">
-                <div class="list-group col-8 text-center align-middle text-center" id="mainList">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-                <div class="col-4 mw-100 d-sm-block">
+                <div class="col-8 mw-100 d-sm-block">
                     <div id="infoCard">
                     </div>
                     <div class="h-50 text-center">            
@@ -77,6 +86,14 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="list-group col-4 text-center align-middle text-center" id="mainList">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
             </div>
 
 
