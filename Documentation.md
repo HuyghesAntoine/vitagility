@@ -18,18 +18,18 @@
         * @googlemaps/google-maps-services-js *3.1.14*
 
 * **API utilisées**
-    * API places by google
-    * API Sports and places by Dectahlon 
-    * Our own API
+    * API Places par google
+    * API Sports et Sports Places par Decathlon 
+    * Notre propre API
 
 * **Fonctionnalitées pour le client** 
     * Recherche d'une adresse ou d'un lieu via la barre de recherche directement liée à l'API google maps. 
     * Ou de laisser la géolocalisation faire le travail
-    * Fixer le rayon de la zone de recherche grâce au selecteur 
+    * Fixer le rayon de la zone de recherche grâce au sélecteur 
     * Outil de recherche avancée pour filtrer les résultats:
         * Lieux en plein air, couvert, les deux
-        * Par type de sports
-        * Lieux ouvert à l'heure de la recherche
+        * Par type de sport
+        * Lieux ouverts à l'heure de la recherche
 
     * Possiblité de selectionner un lieu pour obtenir différentes informations:
         * Nom 
