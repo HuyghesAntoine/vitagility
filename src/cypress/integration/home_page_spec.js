@@ -27,6 +27,8 @@ describe('US -> test api sport id to name', () => {
 })*/
 
 /* Tests on the home page */
+
+/*
 describe('US -> test gmap autocomplete', () => {
     it('Get full adress with 0 details', () => {
         cy.visit('/');
@@ -56,5 +58,4 @@ describe('US -> Adress and sports of places', () => {
 
     })
 })
-
-
+*/
