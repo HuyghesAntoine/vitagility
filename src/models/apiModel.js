@@ -32,22 +32,36 @@ exports.getPlaces = async function (
         //result.data.features.forEach(async (element) => {
         let ad = result.data.features[i].properties.address_components;
         if (
-            result.data.features[i].properties.name !=
-                'Under review, proposed: -' &&
+            result.data.features[i].properties.name != 'Under review, proposed: -' &&
             result.data.features[i].properties.quality_indicator > 0 &&
             nb_result < 10
         ) {
             let sport = await getSport(
                 result.data.features[i].properties.activities[0].sport_id
             );
-            let test_indoor = !indoor;
-            let test_outdoor = !outdoor;
-            console.log(test_indoor + ' && ' + test_outdoor);
+            var test_indoor = false;
+            var test_outdoor = false;
+            var final = false;
             sport.tags.forEach(async (tag) => {
-                test_indoor = (indoor && tag == 'indoor')?true:false;
-                test_outdoor = (outdoor && tag == 'outdoor')?true:false;
+                if(tag=='indoor')
+                    test_indoor = true;
+                if(tag=='outdoor')
+                    test_outdoor = true;
             });
-            if (outdoor  && test_indoor && indoor) {
+            if(indoor && outdoor){
+                if(test_outdoor && test_indoor){
+                    final = true;
+                }
+            }if(indoor && !outdoor){
+                if(test_indoor)
+                    final = true;
+            }if(outdoor && !indoor){
+                if(test_outdoor)
+                    final = true;
+            }if(!outdoor && !indoor)
+                final = true;
+            console.log(indoor + " " + outdoor + " " + test_indoor + " " + test_outdoor + " " + final);
+            if (final == true) {
                 if (ad.address == null) ad.address = 'Inconnu';
                 places.push({
                     address: {
@@ -79,8 +93,15 @@ exports.getPlaces = async function (
     }
     return places;
 };
-
 getSport = async function (id = '') {
+    let result = await fetch(
+        'https://sportplaces.api.decathlon.com/api/v1/sports/' + id
+    );
+    result = await result.json();
+
+    return result;
+};
+exports.getSport = async function (id = '') {
     let result = await fetch(
         'https://sportplaces.api.decathlon.com/api/v1/sports/' + id
     );
