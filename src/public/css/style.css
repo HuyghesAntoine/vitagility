@@ -1,41 +1,5 @@
-/* NAVBAR CSS */
-:root {
-    --brand-digital: #007dbc;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
-.navbar-header {
-    float: left;
-    padding: 5px;
-    text-align: center;
-    width: 100%;
-}
-
 .mh-3 {
     max-height: 300px;
-}
-
-body {
-    font-family: Roboto, sans-serif;
-}
-
-.navbar-brand {
-    float: none;
-}
-
-.btn-brand {
-    background-color: var(--brand-digital);
-}
-
-.display-2 {
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-}
-
-.advancedTitle {
-    text-align: center;
 }
 
 #selectSports {
@@ -45,4 +9,8 @@ body {
 .bg-free {
     background-color: #e2eea0 !important;
     color: black;
+}
+
+.pointer-cursor {
+    cursor: pointer;
 }

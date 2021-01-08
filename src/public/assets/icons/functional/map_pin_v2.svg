@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/functional/map_pin_v2</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.490196 0 0 0 0 0.737255 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="icons/functional/map_pin_v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g filter="url(#filter-1)" id="map_pin_v2">
+            <g transform="translate(6.000000, 2.000000)">
+                <path d="M11.2844,9.5427 L5.9974,19.9987 L0.7104,9.5427 C-1.1106,5.9547 0.6804,0.9227 4.8034,0.1307 C10.4414,-0.9543 13.5284,4.9257 11.2844,9.5427 Z" id="Stroke-1" stroke="#000000" stroke-width="2"></path>
+                <path d="M8.011,6.9983 C8.011,8.1023 7.115,8.9983 6.011,8.9983 C4.907,8.9983 4.011,8.1023 4.011,6.9983 C4.011,5.8943 4.907,4.9983 6.011,4.9983 C7.115,4.9983 8.011,5.8943 8.011,6.9983 Z" id="Stroke-3" stroke="#000000" stroke-width="2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

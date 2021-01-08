@@ -27,8 +27,6 @@ exports.findDetailedPlace = async function (id) {
             res.data.result.photos[i] = await getPhoto(
                 res.data.result.photos[i].photo_reference
             );
-            console.log;
-            //console.log(res.data.result.photos[i]);
         }
     } catch (e) {
         //console.log(e);
@@ -54,6 +52,20 @@ exports.findCityStade = function () {
         .catch((e) => {
             console.log(e.response.data.error_message);
         });
+};
+
+exports.findNearestDecathlon = async function (lng, lat) {
+    const res = await client.findPlaceFromText({
+        params: {
+            key: process.env.GOOGLE_MAPS_API_KEY,
+            input: 'Décathlon',
+            inputtype: 'textquery',
+            locationbias: 'circle:1000@' + lat + ',' + lng,
+            fields: 'formatted_address,name,geometry',
+        },
+        timeout: 1000, // milliseconds
+    });
+    return res.data.candidates[0];
 };
 
 getPhoto = async function (ref) {

@@ -1,19 +1,32 @@
+const listPromotedCode = (data) => `
+    <a id="" class="list-group-item list-group-item-action vtmn-bg-brand-digital-light-3">
+        <div class="d-flex justify-content-between">
+          <p class="mb-1 vtmn-typo_text-1"><img class="d-inline" width="25" src="assets/icons/services/warranty.svg"/> ${data.name} <small class="vtmn-typo_text-3">(${data.formatted_address})
+        </div>
+    </a>
+`;
+
 const listCode = (data) => `
-<a id="${data.uuid}" class="list-group-item list-group-item-action ${typeof data.google_place_id == 'string'
-    ? 'vtmn-border-right-success'
-    : 'vtmn-border-right-danger'
+<a id="${
+    data.uuid
+}" class="list-group-item list-group-item-action pointer-cursor ${
+    typeof data.google_place_id == 'string'
+        ? 'vtmn-border-right-success'
+        : 'vtmn-border-right-danger'
 }">
     <div class="d-flex justify-content-between">
-      <p class="mb-1 vtmn-typo_text-1">${data.quality_indicator >= 3
-        ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
-        : ''
-} ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${data.sport.name
+      <p class="mb-1 vtmn-typo_text-1">${
+          data.quality_indicator >= 3
+              ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
+              : ''
+      } ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${
+    data.sport.name
 })</small></p>
       
       <img
       src="assets/sports_picto/${data.sport.name
-        .replace(/\ /g, '_')
-        .toLowerCase()}.svg"
+          .replace(/\ /g, '_')
+          .toLowerCase()}.svg"
       height="50"
       width="50" />
     </div>
@@ -24,40 +37,46 @@ const listCode = (data) => `
 const cardCode = (data) => `
 <div class="row">
 <div class="col-6">
-${imgSlide(data.photos)}
+${data.photos == undefined ? '' : imgSlide(data.photos)}
 </div>
 <div class="col-6">
 <div class="card">
 
   <div class="card-body">
-    <p class="card-text">
-    <span class="vtmn-typo_title-3">${data.quality_indicator >= 3
-        ? `<img class="d-inline" src="assets/icons/reviews/star_full.svg"/>`
-        : ''
-} ${data.name}</span>
-    <u>sports :</u> ${data.sport.name}<br>
-    <u>adresse :</u> ${data.address.address}<br>
-    ${typeof data.rating !== 'undefined'
-        ? "D' après les utilisateurs :" +
-        `<div class="float-start" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
-        `<img class="d-inline"
-            src="assets/icons/reviews/star_full.svg"
-            height="15"
-            width="15" />`.repeat(parseInt(data.rating)) +
-        `<img class="d-inline"
-            src="assets/icons/reviews/star_empty.svg"
-            height="15"
-            width="15" />`.repeat(5 - parseInt(data.rating)) +
-        `</div>`
-        : ''
-}<br>
+    <div class="d-flex justify-content-between pb-3">
+    <span class="vtmn-typo_title-3">${
+        data.name
+    }</span>   <span class="vtmn-typo_text-1">${data.sport.name}</span></div>
+
+    <img class="d-inline"
+    src="assets/icons/functional/map_pin_v2.svg"
+    height="20"
+    width="20" /><span class="vtmn-typo_text-1"> ${
+        data.address.address
+    }</span><br>
+
+    ${
+        typeof data.rating !== 'undefined'
+            ? `<div class="text-center p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
+              `<img class="d-inline"
+                src="assets/icons/reviews/star_full.svg"
+                height="20"
+                width="20" />`.repeat(parseInt(data.rating)) +
+              `<img class="d-inline"
+                src="assets/icons/reviews/star_empty.svg"
+                height="20"
+                width="20" />`.repeat(5 - parseInt(data.rating)) +
+              `</div>`
+            : ''
+    }
+
+   <br>
     ${data.sport.tags
         .map(function (key, index) {
-            if (index < 5)
-                return `<span class="text-capitalize badge rounded-pill bg-secondary bg-${key.replace(
-                    '-',
-                    ''
-                )}">${key.replace('_', ' ')}</span>`;
+            return `<span class="text-capitalize badge rounded-pill bg-secondary bg-${key.replace(
+                '-',
+                ''
+            )}">${key.replace('_', ' ')}</span>`;
         })
         .filter(Boolean)}
     </p>
@@ -85,9 +104,8 @@ function imgSlide(photos) {
     let inner = '';
     let indicators = '';
     let min = Math.min(photos.length, 3);
-    console.log('Max displaying', min);
     for (i = 0; i < min; i++) {
-        inner += `<div class="carousel-item ${i == 1 ? 'active' : ''}">
+        inner += `<div class="carousel-item ${i == 0 ? 'active' : ''}">
         <img src="${photos[i]}" class="d-block w-100">
       </div>`;
         indicators += `<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active"></li>`;
@@ -146,43 +164,46 @@ async function loadSports() {
 }
 
 async function loadActivities() {
-    console.log(link(def));
     res = await fetch(link(def));
     res = await res.json();
     mainList.innerHTML = '';
-    res.forEach((sport) => {
-        mainList.innerHTML += listCode(sport);
+
+    res.forEach((sport, index) => {
+        if (index == 0) mainList.innerHTML += listPromotedCode(sport);
+        else mainList.innerHTML += listCode(sport);
     });
     document.querySelectorAll('a.list-group-item').forEach((el) => {
         el.addEventListener('click', (event) => {
             res.forEach(async (sport) => {
                 if (sport.uuid == el.id) {
                     detail = {};
-                    if (typeof sport.google_place_id != 'null') {
+                    if (sport.google_place_id != undefined) {
                         let detailedLink =
                             '/api/places/details/' + sport.google_place_id;
                         detail = await fetch(detailedLink);
                         detail = await detail.json();
                         detail = detail.result;
-                        for (
-                            i = 0;
-                            i < Math.max(detail.photos.length, 3);
-                            i++
-                        ) {
-                            var arrayBufferView = new Uint8Array(
-                                detail.photos[i].data
-                            );
-                            var blob = new Blob([arrayBufferView], {
-                                type: 'image/jpeg',
-                            });
-                            var urlCreator = window.URL || window.webkitURL;
-                            var imageUrl = urlCreator.createObjectURL(blob);
-                            detail.photos[i] = imageUrl;
-                        }
+                        if (typeof detail.photos != 'undefined')
+                            for (
+                                i = 0;
+                                i <
+                                (detail.photos.length < 3
+                                    ? detail.photos.length
+                                    : 3);
+                                i++
+                            ) {
+                                var arrayBufferView = new Uint8Array(
+                                    detail.photos[i].data
+                                );
+                                var blob = new Blob([arrayBufferView], {
+                                    type: 'image/jpeg',
+                                });
+                                var urlCreator = window.URL || window.webkitURL;
+                                var imageUrl = urlCreator.createObjectURL(blob);
+                                detail.photos[i] = imageUrl;
+                            }
                     }
-                    console.log(detail);
                     sport = Object.assign(sport, detail);
-                    console.log(sport);
 
                     infoCard.innerHTML = cardCode(sport);
                     document.getElementById('gmap_canvas').src =
@@ -254,7 +275,6 @@ searchForm.addEventListener('submit', async (event) => {
     let res = await fetch('api/find/' + address.value);
 
     res = await res.json();
-    console.log(res);
     def.lat = res.geometry.location.lat;
     def.long = res.geometry.location.lng;
     address.value = res.formatted_address;
