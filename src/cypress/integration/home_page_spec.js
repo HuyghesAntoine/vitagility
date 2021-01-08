@@ -1,9 +1,11 @@
+
 /* Test home page */
 describe('The Home Page', () => {
     it('successfully loads', () => {
         cy.visit('/');
     });
 });
+
 
 /* Tests on our own API */
 describe('US -> test api CANADA coordinates', () => {
@@ -28,12 +30,12 @@ describe('US -> test api sport id to name', () => {
 
 /* Tests on the home page */
 
-/*
+
 describe('US -> test gmap autocomplete', () => {
     it('Get full adress with 0 details', () => {
         cy.visit('/');
         cy.get('#address').clear().type('calais')
-        cy.get('#search', {timeout:2000}).click()
+        cy.get('#search').click()
         cy.get('#address').should('have.value',  'Calais, France')
     })
 })
@@ -50,12 +52,25 @@ describe('US -> Adress and sports of places', () => {
         cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > .d-flex > .mb-1').contains("Salle Quinet")
        // cy.get('.card-text').contains("nom : Salle Quinet") 
         
-        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > .d-flex > small').contains('Volleyball')
-       //  cy.get('.card-text').contains("sports : Volleyball") 
-
-        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > p.mb-1').contains('12 Rue Edgar Quinet')
-       // cy.get('.card-text').contains("adresse : 12 Rue Edgar Quinet")        
+        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > .d-flex > .mb-1 > .vtmn-typo_text-3').contains('(Volleyball)')
+       //  cy.get('.card-text').contains("sports : Volleyball")      
 
     })
 })
-*/
+
+describe('US -> select by sport', () => {
+    it('check if the sport is selected', () => { 
+        // cy.get('.sidebar').scrollTo('top')
+        cy.visit('/')
+        cy.get('#address').clear().type('calais')
+        cy.get('#search').click()
+
+        cy.get('#4446580a-22ae-4a69-a7ef-b50527fee02f', {timeout:10000})
+        cy.get('#selectSports').select('78')
+
+        cy.get('#39ca0250-be07-4006-86fb-2f2777c33ebb > .d-flex > .mb-1', {timeout:10000}).contains("City-Stade")
+       // cy.get('.card-text').contains("nom : Salle Quinet") 
+        
+        cy.get('#39ca0250-be07-4006-86fb-2f2777c33ebb > .d-flex > .mb-1 > .vtmn-typo_text-3').contains('(Basketball)')
+    })
+})
