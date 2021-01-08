@@ -1,28 +1,59 @@
 const listCode = (data) => `
-<a id="${
-    data.uuid
-}" class="list-group-item list-group-item-action" aria-current="true" data-uuid="0">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">${data.name}</h5>
-      <small>${data.sport.name}</small>
+<a id="${data.uuid}" class="list-group-item list-group-item-action ${
+    typeof data.google_place_id == 'string'
+        ? 'vtmn-border-right-success'
+        : 'vtmn-border-right-danger'
+}">
+    <div class="d-flex justify-content-between">
+      <p class="mb-1 vtmn-typo_text-1">${
+          data.quality_indicator >= 3
+              ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
+              : ''
+      } ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${
+    data.sport.name
+})</small></p>
+      
+      <img
+      src="assets/sports_picto/${data.sport.name
+          .replace(/\ /g, '_')
+          .toLowerCase()}.svg"
+      height="50"
+      width="50" />
     </div>
-    <p class="mb-1">${
-        data.address.address != 'Inconnu' ? data.address.address : ''
-    }</p>
+
 </a>
 `;
 
 const cardCode = (data) => `
+<div class="row">
+<div class="col-6">
+${imgSlide(data.photos)}
+</div>
+<div class="col-6">
 <div class="card">
-  <img src="${data.photos}" class="card-img-top mh-3" alt="">
+
   <div class="card-body">
     <p class="card-text">
-    <u>nom :</u> ${data.name}<br>
+    <span class="vtmn-typo_title-3">${
+        data.quality_indicator >= 3
+            ? `<img class="d-inline" src="assets/icons/reviews/star_full.svg"/>`
+            : ''
+    } ${data.name}</span>
     <u>sports :</u> ${data.sport.name}<br>
     <u>adresse :</u> ${data.address.address}<br>
     ${
         typeof data.rating !== 'undefined'
-            ? 'Note utilisateur :' + data.rating + ' / 5'
+            ? "D' après les utilisateurs :" +
+              `<div class="float-start" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
+              `<img class="d-inline"
+            src="assets/icons/reviews/star_full.svg"
+            height="15"
+            width="15" />`.repeat(parseInt(data.rating)) +
+              `<img class="d-inline"
+            src="assets/icons/reviews/star_empty.svg"
+            height="15"
+            width="15" />`.repeat(5 - parseInt(data.rating)) +
+              `</div>`
             : ''
     }<br>
     ${data.sport.tags
@@ -36,7 +67,39 @@ const cardCode = (data) => `
         .filter(Boolean)}
     </p>
   </div>
-</div>`;
+</div></div>`;
+
+function imgSlide(photos) {
+    let inner = '';
+    let indicators = '';
+    let min = Math.min(photos.length, 3);
+    console.log('Max displaying', min);
+    for (i = 0; i < min; i++) {
+        inner += `<div class="carousel-item ${i == 1 ? 'active' : ''}">
+        <img src="${photos[i]}" class="d-block w-100">
+      </div>`;
+        indicators += `<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active"></li>`;
+    }
+
+    if (photos.length == 0) return '';
+
+    return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        ${indicators}
+    </ol>
+    <div class="carousel-inner">
+        ${inner}
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </a>
+    </div>`;
+}
 
 document.getElementById('pleinAirCheck').addEventListener('change', (event) => {
     def.outdoor = document.getElementById('pleinAirCheck').checked;
@@ -83,22 +146,27 @@ async function loadActivities() {
             res.forEach(async (sport) => {
                 if (sport.uuid == el.id) {
                     detail = {};
-                    if (sport.google_place_id != null) {
+                    if (typeof sport.google_place_id != 'null') {
                         let detailedLink =
                             '/api/places/details/' + sport.google_place_id;
                         detail = await fetch(detailedLink);
                         detail = await detail.json();
                         detail = detail.result;
-
-                        var arrayBufferView = new Uint8Array(
-                            detail.photos.data
-                        );
-                        var blob = new Blob([arrayBufferView], {
-                            type: 'image/jpeg',
-                        });
-                        var urlCreator = window.URL || window.webkitURL;
-                        var imageUrl = urlCreator.createObjectURL(blob);
-                        detail.photos = imageUrl;
+                        for (
+                            i = 0;
+                            i < Math.max(detail.photos.length, 3);
+                            i++
+                        ) {
+                            var arrayBufferView = new Uint8Array(
+                                detail.photos[i].data
+                            );
+                            var blob = new Blob([arrayBufferView], {
+                                type: 'image/jpeg',
+                            });
+                            var urlCreator = window.URL || window.webkitURL;
+                            var imageUrl = urlCreator.createObjectURL(blob);
+                            detail.photos[i] = imageUrl;
+                        }
                     }
                     console.log(detail);
                     sport = Object.assign(sport, detail);
@@ -127,28 +195,34 @@ let def = {
     sport: '-1',
 };
 
-if ('geolocation' in navigator) {
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-    };
-    function success(pos) {
-        var crd = pos.coords;
-        def.lat = crd.latitude;
-        def.long = crd.longitude;
-        loadActivities();
-    }
+function geo() {
+    if ('geolocation' in navigator) {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+        };
+        function success(pos) {
+            var crd = pos.coords;
+            def.lat = crd.latitude;
+            def.long = crd.longitude;
+            loadActivities();
+        }
 
-    function error(err) {
-        loadActivities();
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
+        function error(err) {
+            loadActivities();
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
-} else {
-    console.error('Navigateur non compatible avec la géolocalisation');
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    } else {
+        console.error('Navigateur non compatible avec la géolocalisation');
+    }
 }
+
+activeGeo.addEventListener('click', (event) => {
+    geo();
+});
 
 /* Form Listener */
 radius.addEventListener('change', (event) => {
@@ -172,3 +246,5 @@ searchForm.addEventListener('submit', async (event) => {
     address.value = res.formatted_address;
     loadActivities();
 });
+
+geo();

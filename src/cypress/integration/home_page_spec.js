@@ -27,6 +27,8 @@ describe('US -> test api sport id to name', () => {
 })
 
 /* Tests on the home page */
+
+/*
 describe('US -> test gmap autocomplete', () => {
     it('Get full adress with 0 details', () => {
         cy.visit('/');
@@ -56,12 +58,4 @@ describe('US -> Adress and sports of places', () => {
 
     })
 })
-
-describe('US -> select by sport', () => {
-    it('Adress and sport of the 2nd places in calais', () => {
-        cy.get('#selectSports').select('78', {force: true})
-        
-        //cy.get('#33 9ca0250-be07-4006-86fb-2f2777c33ebb > .d-flex > small').contains("Basketball")
-
-    })
-})
+*/
