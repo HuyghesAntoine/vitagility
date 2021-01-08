@@ -72,10 +72,11 @@ Une interface graphique Cypress va s'ouvrir pour que vous puissiez effectuer les
     * **SPRINT 5**
         * Déploiement continue sur Heroku grâce au ci/cd 
         * Mise à jour du design de la page pour coller à l'ésprit Décathlon 
-        * 
-        * 
+        * Ajout de tests cypress sur l'API 
+        * Recherche avancée avec filtre sur le sport pour affiner les recherches
 
     * **SPRINT 6**
-        * 
-        * 
-        *      
+        * Mise en place d'un outil de prévisualisation de qualité de code (**ESLint**) 
+        * Modification design et ajout du magasins décathlon le plus proche de la localisation
+        * Ajout des derniers tests cypress 
+        * Release 1.0 du projet 
