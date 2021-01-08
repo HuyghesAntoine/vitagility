@@ -2,6 +2,7 @@ image: cypress/base:12
 
 stages:
   - build
+  - quality
   - deploy
 
 build:
@@ -12,6 +13,12 @@ build:
     - npm install 
     - npm run dev &
     - npm run cypress:run
+
+quality:
+  stage: quality
+  script:
+    - cd src
+    - npx eslint .
 
 deploy:
     stage: deploy
