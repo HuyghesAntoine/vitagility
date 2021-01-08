@@ -41,7 +41,6 @@ exports.getPlaces = async function (
             );
             let test_indoor = false;
             let test_outdoor = false;
-            console.log(test_indoor + ' && ' + test_outdoor);
             sport.tags.forEach(async (tag) => {
                 if (indoor && tag == 'indoor') {
                     test_indoor = true;

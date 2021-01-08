@@ -18,13 +18,10 @@ exports.apiSports = async function (req, res) {
 
 exports.apiPlacesfromInput = async function (req, res) {
     let result = await googleModel.findPlace(req.params.input);
-    /*let result = await parse.JSON(result);*/
-    console.log(result);
     res.send(result);
 };
 
 exports.apiDetailedPlaces = async function (req, res) {
     let result = await googleModel.findDetailedPlace(req.params.id);
-    console.log(req.params.id);
     res.send(result);
 };
