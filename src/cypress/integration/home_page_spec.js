@@ -73,4 +73,4 @@ describe('US -> select by sport', () => {
         
         cy.get('#39ca0250-be07-4006-86fb-2f2777c33ebb > .d-flex > .mb-1 > .vtmn-typo_text-3').contains('(Basketball)')
     })
-})
+})*/
