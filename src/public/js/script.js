@@ -1,22 +1,19 @@
 const listCode = (data) => `
-<a id="${data.uuid}" class="list-group-item list-group-item-action ${
-    typeof data.google_place_id == 'string'
-        ? 'vtmn-border-right-success'
-        : 'vtmn-border-right-danger'
+<a id="${data.uuid}" class="list-group-item list-group-item-action ${typeof data.google_place_id == 'string'
+    ? 'vtmn-border-right-success'
+    : 'vtmn-border-right-danger'
 }">
     <div class="d-flex justify-content-between">
-      <p class="mb-1 vtmn-typo_text-1">${
-          data.quality_indicator >= 3
-              ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
-              : ''
-      } ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${
-    data.sport.name
+      <p class="mb-1 vtmn-typo_text-1">${data.quality_indicator >= 3
+        ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
+        : ''
+} ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${data.sport.name
 })</small></p>
       
       <img
       src="assets/sports_picto/${data.sport.name
-          .replace(/\ /g, '_')
-          .toLowerCase()}.svg"
+        .replace(/\ /g, '_')
+        .toLowerCase()}.svg"
       height="50"
       width="50" />
     </div>
@@ -34,28 +31,26 @@ ${imgSlide(data.photos)}
 
   <div class="card-body">
     <p class="card-text">
-    <span class="vtmn-typo_title-3">${
-        data.quality_indicator >= 3
-            ? `<img class="d-inline" src="assets/icons/reviews/star_full.svg"/>`
-            : ''
-    } ${data.name}</span>
+    <span class="vtmn-typo_title-3">${data.quality_indicator >= 3
+        ? `<img class="d-inline" src="assets/icons/reviews/star_full.svg"/>`
+        : ''
+} ${data.name}</span>
     <u>sports :</u> ${data.sport.name}<br>
     <u>adresse :</u> ${data.address.address}<br>
-    ${
-        typeof data.rating !== 'undefined'
-            ? "D' après les utilisateurs :" +
-              `<div class="float-start" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
-              `<img class="d-inline"
+    ${typeof data.rating !== 'undefined'
+        ? "D' après les utilisateurs :" +
+        `<div class="float-start" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
+        `<img class="d-inline"
             src="assets/icons/reviews/star_full.svg"
             height="15"
             width="15" />`.repeat(parseInt(data.rating)) +
-              `<img class="d-inline"
+        `<img class="d-inline"
             src="assets/icons/reviews/star_empty.svg"
             height="15"
             width="15" />`.repeat(5 - parseInt(data.rating)) +
-              `</div>`
-            : ''
-    }<br>
+        `</div>`
+        : ''
+}<br>
     ${data.sport.tags
         .map(function (key, index) {
             if (index < 5)
