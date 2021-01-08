@@ -20,13 +20,10 @@ exports.getPlaces = async function (
     if (sport != '-1') {
         url += '&sports=' + sport;
     }
-    console.log(sport);
     let places = [];
 
     let result = await fetch(url);
     result = await result.json();
-
-    console.log(url);
     let nb_result = 0;
     for (i = 0; i < result.data.features.length; i++) {
         //result.data.features.forEach(async (element) => {
@@ -59,17 +56,6 @@ exports.getPlaces = async function (
                 if (test_outdoor) final = true;
             }
             if (!outdoor && !indoor) final = true;
-            console.log(
-                indoor +
-                    ' ' +
-                    outdoor +
-                    ' ' +
-                    test_indoor +
-                    ' ' +
-                    test_outdoor +
-                    ' ' +
-                    final
-            );
             if (final == true) {
                 if (ad.address == null) ad.address = 'Inconnu';
                 places.push({

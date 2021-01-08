@@ -27,8 +27,6 @@ exports.findDetailedPlace = async function (id) {
             res.data.result.photos[i] = await getPhoto(
                 res.data.result.photos[i].photo_reference
             );
-            console.log;
-            //console.log(res.data.result.photos[i]);
         }
     } catch (e) {
         //console.log(e);
@@ -57,7 +55,6 @@ exports.findCityStade = function () {
 };
 
 exports.findNearestDecathlon = async function (lng, lat) {
-    console.log(lng, lat);
     const res = await client.findPlaceFromText({
         params: {
             key: process.env.GOOGLE_MAPS_API_KEY,

@@ -105,7 +105,6 @@ function imgSlide(photos) {
     let indicators = '';
     let min = Math.min(photos.length, 3);
     for (i = 0; i < min; i++) {
-        console.log();
         inner += `<div class="carousel-item ${i == 0 ? 'active' : ''}">
         <img src="${photos[i]}" class="d-block w-100">
       </div>`;
@@ -168,7 +167,6 @@ async function loadActivities() {
     res = await fetch(link(def));
     res = await res.json();
     mainList.innerHTML = '';
-    console.log(res);
 
     res.forEach((sport, index) => {
         if (index == 0) mainList.innerHTML += listPromotedCode(sport);
@@ -180,7 +178,6 @@ async function loadActivities() {
                 if (sport.uuid == el.id) {
                     detail = {};
                     if (sport.google_place_id != undefined) {
-                        console.log('Defniend');
                         let detailedLink =
                             '/api/places/details/' + sport.google_place_id;
                         detail = await fetch(detailedLink);
@@ -207,8 +204,6 @@ async function loadActivities() {
                             }
                     }
                     sport = Object.assign(sport, detail);
-
-                    console.log(sport);
 
                     infoCard.innerHTML = cardCode(sport);
                     document.getElementById('gmap_canvas').src =
@@ -280,7 +275,6 @@ searchForm.addEventListener('submit', async (event) => {
     let res = await fetch('api/find/' + address.value);
 
     res = await res.json();
-    console.log(res);
     def.lat = res.geometry.location.lat;
     def.long = res.geometry.location.lng;
     address.value = res.formatted_address;
