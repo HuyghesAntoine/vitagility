@@ -9,7 +9,7 @@ Toutes les informations nécessaires sont décrites dans les documents suivant:
 ---
 # Vitagility | Huyghes Antoine, Pecqueux Théo, Skibinski Pierre, Wallet Nicolas 
 
-
+## [VitAgility site officiel](https://vitagility.herokuapp.com/)
 ---
 **WARNING** : il est nécéssaire d'importer une clé API GoogleMaps pour utiliser le projet en local
 ```bash
