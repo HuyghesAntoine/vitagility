@@ -69,6 +69,23 @@ ${imgSlide(data.photos)}
   </div>
 </div></div>`;
 
+var app = document.getElementById('loadingText');
+
+var typewriter = new Typewriter(app, {
+    loop: true,
+    cursor: '',
+    delay: '80',
+});
+
+typewriter
+    .typeString('Chargement de vos résultats ...')
+    .deleteChars(13)
+    .typeString("lieux d'entrainement")
+    .deleteChars("lieux d'entrainement".length)
+    .typeString('marathons')
+    .pause(1000)
+    .start();
+
 function imgSlide(photos) {
     let inner = '';
     let indicators = '';
@@ -183,6 +200,7 @@ async function loadActivities() {
             });
         });
     });
+    loader.classList.add('d-none');
 }
 
 // Global
@@ -235,6 +253,7 @@ loadingCode = `<div class="spinner-border" role="status">
 </div>`;
 
 searchForm.addEventListener('submit', async (event) => {
+    loader.classList.remove('d-none');
     event.preventDefault();
     mainList.innerHTML = loadingCode;
     let res = await fetch('api/find/' + address.value);
