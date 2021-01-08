@@ -20,7 +20,7 @@ eslint:
   script:
     - cd src
     - npm ci
-    - npm x eslint --format gitlab .
+    - npx eslint --format gitlab .
   artifacts:
     reports:
       codequality: gl-codequality.json
