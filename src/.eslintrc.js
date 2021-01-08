@@ -9,18 +9,15 @@ module.exports = {
         ecmaVersion: 12,
     },
     rules: {
-        "indent": ["error",4],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "no-unused-vars": "off",
-        "no-undef": "off",
+        indent: ['warn', 4],
+        'linebreak-style': 'off',
+        'no-unused-vars': 'off',
+        'no-undef': 'off',
     },
     globals: {
-        "_": "readonly",
+        _: 'readonly',
     },
     parserOptions: {
-        "sourceType": "module",
+        sourceType: 'module',
     },
 };

@@ -60,11 +60,16 @@ describe('US -> test main list length', () => {
 
 describe('US -> Adress and sports of places', () => {
     it('Adress and sport of the 2nd places in calais', () => {
-        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf').click();
+        cy.visit('/');
+        cy.get('#address').clear().type('calais');
+        cy.get('#search').click();
+        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf', {
+            timeout: 50000,
+        }).click();
 
-        cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > .d-flex > .mb-1', {
-            timeout: 10000,
-        }).contains('Salle Quinet');
+        cy.get(
+            '#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf > .d-flex > .mb-1'
+        ).contains('Salle Quinet');
         // cy.get('.card-text').contains("nom : Salle Quinet")
 
         cy.get(

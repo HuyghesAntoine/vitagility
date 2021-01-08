@@ -7,9 +7,9 @@ const listPromotedCode = (data) => `
 `;
 
 const listCode = (data) => `
-<a id="${data.uuid}" class="list-group-item list-group-item-action ${
-    typeof data.google_place_id == 'string' ? 'pointer-cursor' : ''
-} ${
+<a id="${
+    data.uuid
+}" class="list-group-item list-group-item-action pointer-cursor ${
     typeof data.google_place_id == 'string'
         ? 'vtmn-border-right-success'
         : 'vtmn-border-right-danger'
