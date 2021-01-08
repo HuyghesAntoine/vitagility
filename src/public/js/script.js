@@ -16,17 +16,17 @@ const listCode = (data) => `
 }">
     <div class="d-flex justify-content-between">
       <p class="mb-1 vtmn-typo_text-1">${
-          data.quality_indicator >= 3
-              ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
-              : ''
-      } ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${
+    data.quality_indicator >= 3
+        ? `<img class="d-inline" width="25" src="assets/icons/services/badge.svg"/>`
+        : ''
+} ${data.name} <small class="vtmn-typo_text-3 vtmn-text-grey">(${
     data.sport.name
 })</small></p>
       
       <img
       src="assets/sports_picto/${data.sport.name
-          .replace(/\ /g, '_')
-          .toLowerCase()}.svg"
+        .replace(/\ /g, '_')
+        .toLowerCase()}.svg"
       height="50"
       width="50" />
     </div>
@@ -45,19 +45,19 @@ ${data.photos == undefined ? '' : imgSlide(data.photos)}
   <div class="card-body">
     <div class="d-flex justify-content-between pb-3">
     <span class="vtmn-typo_title-3">${
-        data.name
-    }</span>   <span class="vtmn-typo_text-1">${data.sport.name}</span></div>
+    data.name
+}</span>   <span class="vtmn-typo_text-1">${data.sport.name}</span></div>
 
     <img class="d-inline"
     src="assets/icons/functional/map_pin_v2.svg"
     height="20"
     width="20" /><span class="vtmn-typo_text-1"> ${
-        data.address.address
-    }</span><br>
+    data.address.address
+}</span><br>
 
     ${
-        typeof data.rating !== 'undefined'
-            ? `<div class="text-center p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
+    typeof data.rating !== 'undefined'
+        ? `<div class="text-center p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${data.rating} / 5 ">` +
               `<img class="d-inline"
                 src="assets/icons/reviews/star_full.svg"
                 height="20"
@@ -67,8 +67,8 @@ ${data.photos == undefined ? '' : imgSlide(data.photos)}
                 height="20"
                 width="20" />`.repeat(5 - parseInt(data.rating)) +
               `</div>`
-            : ''
-    }
+        : ''
+}
 
    <br>
     ${data.sport.tags
@@ -93,7 +93,7 @@ var typewriter = new Typewriter(app, {
 
 typewriter
     .typeString('Chargement de vos résultats ...')
-    .deleteChars(13)
+    .deleteChars('résultats ...'.length)
     .typeString("lieux d'entrainement")
     .deleteChars("lieux d'entrainement".length)
     .typeString('marathons')

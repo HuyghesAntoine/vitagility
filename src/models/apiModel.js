@@ -68,13 +68,13 @@ exports.getPlaces = async function (
                             typeof result.data.features[i].geometry
                                 .coordinates[0] == 'object'
                                 ? result.data.features[i].geometry
-                                      .coordinates[0]
+                                    .coordinates[0]
                                 : [
-                                      result.data.features[i].geometry
-                                          .coordinates[0],
-                                      result.data.features[i].geometry
-                                          .coordinates[1],
-                                  ],
+                                    result.data.features[i].geometry
+                                        .coordinates[0],
+                                    result.data.features[i].geometry
+                                        .coordinates[1],
+                                ],
                     },
                     google_place_id:
                         result.data.features[i].properties.google_place_id,
