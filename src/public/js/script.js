@@ -110,13 +110,12 @@ document.getElementById('couvertCheck').addEventListener('change', (event) => {
     loadActivities();
 });
 document.getElementById('selectSports').addEventListener('change', (event) => {
-    def.selected_sport = document.getElementById('selectSports').value;
-    console.log(def.selected_sport);
+    def.sport = document.getElementById('selectSports').value;
     loadActivities();
 });
 
 const link = (def) =>
-    `/api/places/${def.long}&${def.lat}&${def.radius}&${def.selected_sport}&${def.outdoor}&${def.indoor}`;
+    `/api/places/${def.long}&${def.lat}&${def.radius}&${def.sport}&${def.outdoor}&${def.indoor}`;
 let res = [];
 document.getElementById('pleinAirCheck').checked = true;
 document.getElementById('couvertCheck').checked = true;
@@ -125,26 +124,19 @@ loadSports();
 async function loadSports() {
     let sports = await fetch('/api/sports');
     sports = await sports.json();
-    let name_sports = [];
     sports.forEach((sport) => {
-        name_sports.push([sport.name, sport.id]);
-    });
-    name_sports.sort();
-    name_sports.forEach((sport) => {
         var node = document.createElement('option');
-        var textnode = document.createTextNode(sport[0]);
+        var textnode = document.createTextNode(sport.name);
         node.appendChild(textnode);
-        node.value = sport[0];
+        node.value = sport.id;
         document.getElementById('selectSports').appendChild(node);
     });
-    console.log(name_sports);
 }
 
 async function loadActivities() {
+    console.log(link(def));
     res = await fetch(link(def));
     res = await res.json();
-    let ourdoor = document.getElementById('pleinAirCheck').checked;
-    console.log(res);
     mainList.innerHTML = '';
     res.forEach((sport) => {
         mainList.innerHTML += listCode(sport);
@@ -200,7 +192,7 @@ let def = {
     radius: '100',
     indoor: 'true',
     outdoor: 'true',
-    selected_sport: null,
+    sport: '-1',
 };
 
 function geo() {
