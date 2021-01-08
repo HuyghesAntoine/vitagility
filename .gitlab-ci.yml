@@ -3,7 +3,6 @@ image: cypress/base:12
 stages:
   - build
   - deploy
-  - quality
 
 build:
   stage: build
@@ -13,23 +12,6 @@ build:
     - npm install 
     - npm run dev &
     - npm run cypress:run
-
-quality: 
-  stage: quality 
-  image: docker:stable
-  services:
-    - docker:stable-dind
-  script: 
-    -mkdir codequality-results
-    -docker run
-      --env CODECLIMATE_CODE="$PWD"
-      --volume "$PWD":/code
-      --volume /var/run/docker.sock:/var/run/docker.sock
-      --volume /tmp/cc:/tmp/cc
-      codeclimate/codeclimate analyse -f html > ./codequality-results.index.html
-  artifacts:
-    paths:
-      - codequality-results/
 
 deploy:
     stage: deploy
