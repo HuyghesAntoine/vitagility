@@ -2,6 +2,7 @@ image: cypress/base:12
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -11,3 +12,16 @@ build:
     - npm install 
     - npm run dev &
     - npm run cypress:run
+
+deploy:
+    stage: deploy
+    image: bitnami/minideb
+    before_script:
+        - apt-get update
+        - apt-get install -y git ruby ruby-dev nodejs npm curl
+        - gem install dpl
+    script:
+        - cd src
+        - dpl --provider=heroku --app=vitagility --api-key=$HEROKU_API_KEY
+    only:
+        - master

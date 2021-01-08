@@ -42,7 +42,7 @@ describe('US -> test main list length', () => {
         expect('#mainList').to.have.lengthOf(9)
     })
 })
-
+/*
 describe('US -> Adress and sports of places', () => {
     it('Adress and sport of the 2nd places in calais', () => {
         cy.get('#ff8b5d2a-d885-4b4d-8807-1c0256ef1daf').click()

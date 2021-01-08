@@ -9,9 +9,31 @@ Toutes les informations nécessaires sont décrites dans les documents suivant:
 ---
 # Vitagility | Huyghes Antoine, Pecqueux Théo, Skibinski Pierre, Wallet Nicolas 
 
+
+---
+**WARNING** : il est nécéssaire d'importer une clé API GoogleMaps pour utiliser le projet en local
+```bash
+export GOOGLE_MAPS_API_KEY="YOUR_KEY"
+```
+Il faut ensuite installer les packages nécéssaire et lancer le serveur
+```bash
+cd src
+npm i && npm run dev
+```
+
+Pour effectuer les tests cypress qui sont présent dans le projet
+```bash
+npm run cypress:open
+```
+Une interface graphique Cypress va s'ouvrir pour que vous puissiez effectuer les tests sur votre navigateur
+
+---
+
 ## Compte rendu journalier: 
 
 ### [Lien du repo](https://www.gitlab.com/huyghes-antoine/vitagility)
+
+
 
 
 * **06/01 :** 
@@ -44,3 +66,16 @@ Toutes les informations nécessaires sont décrites dans les documents suivant:
         * Mise en place des tests avec l'outil Cypress. 
         * Refonte du design pour coller au design de décathlon 
         * Mise en place de l'ajout d'adresse complète lors des recherches de lieux. Ex: recherche "calais"  ->  "Calais, France" grâce à l'API de google maps. 
+
+* **08/01 :** 
+
+    * **SPRINT 5**
+        * Déploiement continue sur Heroku grâce au ci/cd 
+        * Mise à jour du design de la page pour coller à l'ésprit Décathlon 
+        * 
+        * 
+
+    * **SPRINT 6**
+        * 
+        * 
+        *      
