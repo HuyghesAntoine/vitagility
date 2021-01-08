@@ -16,7 +16,7 @@
         />
         
         <link rel="stylesheet" href="css/index.css" type="text/css"/>
-        <link rel="stylesheet" href="css/style.css.css" type="text/css"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
     </head>
 
     <body>
@@ -32,7 +32,7 @@
                <p class="pb-3 text-center vtmn-typo_title-3"> <img width="25" class="d-inline" src="assets/icons/standard/notif_information.svg"> Avec <span class="vtmn-typo_display-2"><span class="vtmn-text-brand-digital">Vit</span>Agility</span> retrouvez en un clic vos lieux de <span class="vtmn-bg-brand-digital vtmn-text-white vtmn-font-bold vtmn-uppercase">pratiques sportives</span>.</p>
             <form id="searchForm">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="activeGeo"><img src="assets/icons/standard/geolocalization.svg"></span>
+                    <span class="input-group-text pointer-cursor" id="activeGeo"><img src="assets/icons/standard/geolocalization.svg"></span>
                     <input id="address" type="text" class="form-control" placeholder="Adresse">
                     <select class="form-select" id="radius">
                         <option selected>Rayon...</option>
@@ -50,7 +50,7 @@
             <div class="card-header advancedTitle">Recherche avancée</div>
             <div class="card-body">
                 <form>
-                    <div class="row">
+                    
                         <div class="input-group col">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="inlineCheckbox1"> <input class="form-check-input" type="checkbox" id="pleinAirCheck" value="option1" checked> Plein air</label>
@@ -58,11 +58,6 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="couvertCheck" value="option2" checked>
                             <label class="form-check-label" for="inlineCheckbox2"> Couvert </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="ouvertCheck" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3"> Ouvert maintenant </label>
-                            </div>
                         </div>
                         <select class="form-select col" id="selectSports" >
                             <option value="-1" selected>Sports...</option>
@@ -80,13 +75,13 @@
                 </div>
             </div>
 
-            <div class="row g-0">
+            <div class="row">
                 <div class="col-8 mw-100 d-sm-block">
                     <div id="infoCard">
                     </div>
                     <div class="h-50 text-center">            
                         <div class="mapouter">
-                            <div class="gmap_canvas">
+                            <div class="gmap_canvas pt-3">
                                 <iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q=<%=`def.lat , def.long`%>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                                 
                                 <style>.mapouter{position:relative;text-align:right;height:100%;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}</style>

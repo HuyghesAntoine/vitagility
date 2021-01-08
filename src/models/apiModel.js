@@ -17,7 +17,7 @@ exports.getPlaces = async function (
         radius +
         '&limit=' +
         100;
-    if (sport != "-1") {
+    if (sport != '-1') {
         url += '&sports=' + sport;
     }
     console.log(sport);
@@ -32,7 +32,8 @@ exports.getPlaces = async function (
         //result.data.features.forEach(async (element) => {
         let ad = result.data.features[i].properties.address_components;
         if (
-            result.data.features[i].properties.name != 'Under review, proposed: -' &&
+            result.data.features[i].properties.name !=
+                'Under review, proposed: -' &&
             result.data.features[i].properties.quality_indicator > 0 &&
             nb_result < 10
         ) {
@@ -43,24 +44,32 @@ exports.getPlaces = async function (
             var test_outdoor = false;
             var final = false;
             sport.tags.forEach(async (tag) => {
-                if(tag=='indoor')
-                    test_indoor = true;
-                if(tag=='outdoor')
-                    test_outdoor = true;
+                if (tag == 'indoor') test_indoor = true;
+                if (tag == 'outdoor') test_outdoor = true;
             });
-            if(indoor && outdoor){
-                if(test_outdoor && test_indoor){
+            if (indoor && outdoor) {
+                if (test_outdoor && test_indoor) {
                     final = true;
                 }
-            }if(indoor && !outdoor){
-                if(test_indoor)
-                    final = true;
-            }if(outdoor && !indoor){
-                if(test_outdoor)
-                    final = true;
-            }if(!outdoor && !indoor)
-                final = true;
-            console.log(indoor + " " + outdoor + " " + test_indoor + " " + test_outdoor + " " + final);
+            }
+            if (indoor && !outdoor) {
+                if (test_indoor) final = true;
+            }
+            if (outdoor && !indoor) {
+                if (test_outdoor) final = true;
+            }
+            if (!outdoor && !indoor) final = true;
+            console.log(
+                indoor +
+                    ' ' +
+                    outdoor +
+                    ' ' +
+                    test_indoor +
+                    ' ' +
+                    test_outdoor +
+                    ' ' +
+                    final
+            );
             if (final == true) {
                 if (ad.address == null) ad.address = 'Inconnu';
                 places.push({
@@ -70,7 +79,16 @@ exports.getPlaces = async function (
                         city: ad.city,
                         country: ad.country,
                         coordinates:
-                            result.data.features[i].geometry.coordinates[0],
+                            typeof result.data.features[i].geometry
+                                .coordinates[0] == 'object'
+                                ? result.data.features[i].geometry
+                                      .coordinates[0]
+                                : [
+                                      result.data.features[i].geometry
+                                          .coordinates[0],
+                                      result.data.features[i].geometry
+                                          .coordinates[1],
+                                  ],
                     },
                     google_place_id:
                         result.data.features[i].properties.google_place_id,
@@ -115,18 +133,13 @@ exports.getSports = async function () {
         'https://sportplaces.api.decathlon.com/api/v1/sports/'
     );
     result = await result.json();
-    order = []
+    order = [];
     result.forEach((sport) => {
-        order.push({name: sport.name, 
-            id: sport.id,
-            tags: sport.tags
-        });
+        order.push({ name: sport.name, id: sport.id, tags: sport.tags });
     });
-    order.sort(function(a, b){
-        if(a.name < b.name)
-            return -1;
-        else
-            return 1;
+    order.sort(function (a, b) {
+        if (a.name < b.name) return -1;
+        else return 1;
     });
 
     return order;

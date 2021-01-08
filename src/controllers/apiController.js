@@ -2,7 +2,14 @@ const apiModel = require('../models/apiModel');
 const googleModel = require('../models/googleApiModel');
 
 exports.apiPlaces = async function (req, res) {
-    console.log(req.params.long, req.params.lat, req.params.radius, req.params.sport, req.params.outdoor, req.params.indoor);
+    console.log(
+        req.params.long,
+        req.params.lat,
+        req.params.radius,
+        req.params.sport,
+        req.params.outdoor,
+        req.params.indoor
+    );
     let result = await apiModel.getPlaces(
         req.params.long,
         req.params.lat,
@@ -11,7 +18,11 @@ exports.apiPlaces = async function (req, res) {
         req.params.outdoor,
         req.params.indoor
     );
-    console.log(req.params.long, req.params.lat, req.params.radius);
+    let decathlon = await googleModel.findNearestDecathlon(
+        req.params.long,
+        req.params.lat
+    );
+    result.unshift(decathlon);
     res.send(result);
 };
 

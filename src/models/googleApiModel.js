@@ -56,6 +56,21 @@ exports.findCityStade = function () {
         });
 };
 
+exports.findNearestDecathlon = async function (lng, lat) {
+    console.log(lng, lat);
+    const res = await client.findPlaceFromText({
+        params: {
+            key: process.env.GOOGLE_MAPS_API_KEY,
+            input: 'Décathlon',
+            inputtype: 'textquery',
+            locationbias: 'circle:1000@' + lat + ',' + lng,
+            fields: 'formatted_address,name,geometry',
+        },
+        timeout: 1000, // milliseconds
+    });
+    return res.data.candidates[0];
+};
+
 getPhoto = async function (ref) {
     const res = await client.placePhoto({
         params: {
